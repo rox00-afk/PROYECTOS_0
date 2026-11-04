@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Nebulosa Morada ✨ — Galería Cool</title>
+<style>
+  /* ============ BASE ============ */
+  :root{
+    --morado:#a855f7;
+    --morado-fuerte:#7c3aed;
+    --morado-claro:#d8b4fe;
+    --rosa-neon:#e879f9;
+    --blanco:#ffffff;
+    --negro:#0b0512;
+    --negro-suave:#1a0f2e;
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    min-height:100vh;
+    color:var(--blanco);
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:var(--negro);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ============ FONDO CON ESTRELLAS ============ */
+  .galaxia{
+    position:fixed; inset:0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(124,58,237,.45), transparent 55%),
+      radial-gradient(circle at 80% 20%, rgba(168,85,247,.35), transparent 50%),
+      radial-gradient(circle at 70% 85%, rgba(232,121,249,.25), transparent 55%),
+      radial-gradient(circle at 15% 85%, rgba(124,58,237,.30), transparent 50%),
+      linear-gradient(160deg, #05020a 0%, #0b0512 45%, #140826 100%);
+    z-index:-3;
+  }
+  .estrellas,
+  .estrellas2{
+    position:fixed; inset:0;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+      radial-gradient(2px 2px at 40px 70px, var(--morado-claro), transparent),
+      radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+      radial-gradient(2px 2px at 160px 160px, var(--rosa-neon), transparent),
+      radial-gradient(1px 1px at 220px 120px, #fff, transparent),
+      radial-gradient(2px 2px at 300px 60px, var(--morado-claro), transparent),
+      radial-gradient(1px 1px at 380px 220px, #fff, transparent),
+      radial-gradient(2px 2px at 450px 90px, var(--rosa-neon), transparent);
+    background-size:500px 500px;
+    z-index:-2;
+    animation: brillar 5s ease-in-out infinite alternate;
+  }
+  .estrellas2{
+    background-image:
+      radial-gradient(1px 1px at 60px 150px, #fff, transparent),
+      radial-gradient(2px 2px at 170px 60px, var(--morado), transparent),
+      radial-gradient(1px 1px at 250px 250px, #fff, transparent),
+      radial-gradient(1px 1px at 340px 150px, var(--rosa-neon), transparent),
+      radial-gradient(2px 2px at 430px 260px, var(--morado-claro), transparent);
+    background-size:480px 480px;
+    opacity:.65;
+    animation: brillar 6s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes brillar{
+    from{ opacity:.35; transform:translateY(0); }
+    to{ opacity:.9; transform:translateY(-18px); }
+  }
+
+  /* ============ BOTONES FLOTANTES ============ */
+  .boton-flotante{
+    position:fixed; z-index:50;
+    border:none; cursor:pointer;
+    width:52px; height:52px; border-radius:50%;
+    font-size:22px;
+    color:var(--blanco);
+    background:rgba(124,58,237,.18);
+    border:1px solid rgba(168,85,247,.6);
+    backdrop-filter:blur(8px);
+    box-shadow:0 0 18px rgba(168,85,247,.5);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .boton-flotante:hover{
+    transform:scale(1.12);
+    box-shadow:0 0 30px rgba(232,121,249,.8);
+  }
+  #btnArriba{ right:20px; bottom:20px; }
+  #btnMusica { right:86px; bottom:20px; }
+
+  /* ============ CONTENEDOR ============ */
+  .contenedor{
+    max-width:1100px;
+    margin:0 auto;
+    padding:60px 20px 140px;
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    text-align:center;
+    padding:70px 0 30px;
+  }
+  .insignia{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    font-size:14px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--morado-claro);
+    background:rgba(168,85,247,.12);
+    border:1px solid rgba(168,85,247,.4);
+    animation: flotar 3.5s ease-in-out infinite;
+  }
+  @keyframes flotar{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-6px); }
+  }
+  h1{
+    margin:18px 0 8px;
+    font-size:clamp(2.4rem, 6vw, 4.5rem);
+    font-weight:900;
+    letter-spacing:1px;
+  }
+  h1 .neon{
+    background:linear-gradient(90deg, var(--rosa-neon), var(--morado-claro), var(--morado));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 0 18px rgba(232,121,249,.8));
+  }
+  .eslogan{
+    font-size:clamp(1rem, 2.5vw, 1.3rem);
+    color:var(--morado-claro);
+    text-shadow:0 0 12px rgba(168,85,247,.6);
+  }
+
+  /* ============ ESTRELLAS + GRID ============ */
+  .divisor{
+    display:flex; align-items:center; gap:14px;
+    justify-content:center;
+    margin:44px 0 34px;
+  }
+  .divisor::before, .divisor::after{
+    content:"";
+    height:2px; width:90px; max-width:22vw;
+    background:linear-gradient(90deg, transparent, var(--morado));
+    border-radius:2px;
+  }
+  .divisor::after{
+    background:linear-gradient(90deg, var(--morado), transparent);
+  }
+  .divisor span{ font-size:22px; animation: flotar 3s ease-in-out infinite; }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));
+    gap:24px;
+  }
+  .tarjeta{
+    background:rgba(26,15,46,.6);
+    border:1px solid rgba(168,85,247,.35);
+    border-radius:20px;
+    overflow:hidden;
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+    transition:transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .tarjeta:hover{
+    transform:translateY(-8px);
+    border-color:rgba(232,121,249,.8);
+    box-shadow:0 18px 45px rgba(168,85,247,.4);
+  }
+  .tarjeta .marco{
+    position:relative;
+    aspect-ratio:1/1;
+    overflow:hidden;
+  }
+  .tarjeta img{
+    width:100%; height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .4s ease;
+  }
+  .tarjeta:hover img{ transform:scale(1.06); }
+  .tarjeta .capa{
+    position:absolute; inset:0;
+    background:linear-gradient(to top, rgba(11,5,18,.9) 15%, transparent 60%);
+    opacity:0;
+    transition:opacity .3s;
+    display:flex;
+    align-items:flex-end;
+    padding:16px;
+  }
+  .tarjeta:hover .capa{ opacity:1; }
+  .tarjeta .titulo{
+    font-weight:700;
+    font-size:17px;
+    color:var(--blanco);
+    text-shadow:0 0 8px rgba(168,85,247,.9);
+    transform:translateY(10px);
+    transition:transform .3s;
+  }
+  .tarjeta:hover .titulo{ transform:translateY(0); }
+
+  /* ============ SECCIONES DE TEXTO ============ */
+  .seccion-titulo{
+    font-size:clamp(1.6rem, 4vw, 2.3rem);
+    margin:70px 0 26px;
+    text-align:center;
+    background:linear-gradient(90deg, var(--morado-claro), var(--blanco));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:none;
+  }
+  .caja{
+    max-width:760px;
+    margin:0 auto 26px;
+    padding:26px 28px;
+    border-radius:18px;
+    background:rgba(26,15,46,.55);
+    border:1px solid rgba(168,85,247,.3);
+    backdrop-filter:blur(8px);
+  }
+  .caja p{ line-height:1.75; color:var(--morado-claro); }
+  .caja strong{ color:var(--blanco); }
+
+  .chip{
+    display:inline-block;
+    padding:7px 15px;
+    margin:4px;
+    border-radius:999px;
+    font-size:14px;
+    color:var(--blanco);
+    background:rgba(124,58,237,.25);
+    border:1px solid rgba(168,85,247,.55);
+    transition:transform .2s, box-shadow .2s;
+  }
+  .chip:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 14px rgba(232,121,249,.7);
+  }
+
+  footer{
+    text-align:center;
+    padding:36px 16px 120px;
+    color:var(--morado-claro);
+    border-top:1px solid rgba(168,85,247,.25);
+    margin-top:60px;
+    font-size:15px;
+  }
+  footer .corazon{ color:var(--rosa-neon); animation:latido 1.2s infinite; display:inline-block; }
+  @keyframes latido{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.35); } }
+
+  @media (max-width:600px){
+    .contenedor{ padding:40px 14px 130px; }
+    .boton-flotante{ width:46px; height:46px; font-size:19px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="galaxia"></div>
+<div class="estrellas"></div>
+<div class="estrellas2"></div>
+
+<header class="contenedor">
+  <div class="hero">
+    <span class="insignia">✦ I Love You ✦</span>
+    <h1>Novilunio <span class="neon">Morado</span></h1>
+    <p class="eslogan">Te amo♥ · Te quiero♥ · Te admiro♥</p>
+  </div>
+
+  <div class="divisor">
+    <span>✦</span>
+    <span>🪐</span>
+    <span>✧</span>
+  </div>
+
+  <div class="grid">
+    <article class="tarjeta">
+      <a href="lugar1.html" class="enlace-tarjeta">
+        <div class="marco">
+          <img src="imgif_6.gif" alt="Para tí" loading="lazy">
+          <div class="capa"><span class="titulo">Para Tí💜</span></div>
+        </div>
+      </a>
+    </article>
+
+    <article class="tarjeta">
+      <a href="lugar2.html" class="enlace-tarjeta">
+        <div class="marco">
+          <img src="imgif_8.gif" alt="Lo que significas para mí" loading="lazy">
+          <div class="capa"><span class="titulo">💜Lo que significas para mí💥</span></div>
+        </div>
+      </a>
+    </article>
+
+    <article class="tarjeta">
+      <a href="lugar3.html" class="enlace-tarjeta">
+        <div class="marco">
+          <img src="imgif_7.gif" alt="ggg" loading="lazy">
+          <div class="capa"><span class="titulo">☺Siento bonito x ti💜</span></div>
+        </div>
+      </a>
+    </article>
+
+    <article class="tarjeta">
+      <a href="lugar4.html" class="enlace-tarjeta">
+        <div class="marco">
+          <img src="imgif_9.gif" alt="Perrito creyendo que puede volar" loading="lazy">
+          <div class="capa"><span class="titulo">“Tu me haces volar” 🚀</span></div>
+        </div>
+      </a>
+    </article>
+
+    <article class="tarjeta">
+      <a href="lugar5.html" class="enlace-tarjeta">
+        <div class="marco">
+          <img src="imgif_4.gif" alt="Gato adorable maullando" loading="lazy">
+          <div class="capa"><span class="titulo">Gatita mimosa💜</span></div>
+        </div>
+      </a>
+    </article>
+
+    <article class="tarjeta">
+      <a href="lugar6.html" class="enlace-tarjeta">
+        <div class="marco">
+          <img src="imgif_3.gif" alt="Gato DJ con lentes cool" loading="lazy">
+          <div class="capa"><span class="titulo">◘☺◘Eres la mejor siempre 🎧</span></div>
+        </div>
+      </a>
+    </article>
+  </div>
+
+  <h2 class="seccion-titulo">¿Por qué te amo tanto? ✨</h2>
+  <div class="caja">
+    <p>
+      Esta página respira <strong>morado neón</strong> que es el color que te gusta aun que no te conosco bien/o te entiendo bien, pero creo q es parte de lo que me gusta amo cada cosa nueva que se de ti♥
+    </p>
+  </div>
+
+  <h2 class="seccion-titulo">Nunca dudes de mi amor🎨</h2>
+  <div class="caja">
+    <p>
+      Aveces eres algo insegura y te llegas a molestar ,pero <strong>me gustas asi como eres</strong> por q si no seria asi no serias tu y 
+      <strong>Yo Te Amo Mucho A Tí</strong>, siempre te quedre asi como eres
+    </p>
+  </div>
+
+  <h2 class="seccion-titulo">Cosas que amo de ti 💜</h2>
+  <div class="caja">
+    <span class="chip">Tus ojitos en los q me gusta perderme cada vez q me miras y sonries</span>
+    <span class="chip">Tu cabello sea ondulado o laceo me gusta mucho acariciarlo</span>
+    <span class="chip">Tus lindos labios</span>
+    <span class="chip">Tus lindos cachetitos</span>
+    <span class="chip">Tus manitas tan lindas para q me abraces</span>
+    <span class="chip">Tus piecitos para q caminemos juntos ppp♥</span>
+  </div>
+
+  <footer>
+    Hecho con amor<span class="">💜</span> y mucho cariño ·
+    ♥♥♥
+  </footer>
+</header>
+
+<button class="boton-flotante" id="btnArriba" title="Subir arriba">⬆️</button>
+<button class="boton-flotante" id="btnMusica" title="Música">🔊</button>
+
+<audio id="musica" src="tu-cancion.mp3" loop></audio>
+
+<script>
+  // Botón para subir
+  document.getElementById('btnArriba').addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Botón de música
+  const btnMusica = document.getElementById('btnMusica');
+  const musica = document.getElementById('musica');
+  let sonando = false;
+
+  btnMusica.addEventListener('click', () => {
+    if (sonando) {
+      musica.pause();
+      btnMusica.textContent = '🔊';
+    } else {
+      musica.play();
+      btnMusica.textContent = '🔇';
+    }
+    sonando = !sonando;
+  });
+</script>
+
+
+
+</body>
+</html>

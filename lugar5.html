@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El museo de ti</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+*{box-sizing:border-box}
+body{margin:0;background:#e9e4db;color:#292821;font-family:'DM Sans',sans-serif}
+.nav{padding:22px 7%;display:flex;justify-content:space-between;color:#68665c;font-size:50px;letter-spacing:.17em;text-transform:uppercase}
+.brand{font:italic 18px 'Playfair Display',serif;color:#a75848;text-transform:none;letter-spacing:0}
+.hero{min-height:85vh;padding:50px 8%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:6%}
+.tag{color:#a75848;font-size:10px;letter-spacing:.22em;text-transform:uppercase}
+h1{font:400 clamp(52px,8vw,96px)/.98 'Playfair Display',serif;letter-spacing:-.05em}
+h1 em{color:#a75848}
+.hero p,.intro p{color:#77756c;line-height:1.9;max-width:440px}
+.gallery{height:480px;position:relative}
+.frame{position:absolute;background:#f8f5ed;padding:13px 13px 42px;box-shadow:0 18px 40px #28251d25}
+.frame img{width:100%;height:100%;object-fit:cover}
+.one{width:65%;height:78%;right:4%;top:3%;transform:rotate(3deg)}
+.two{width:45%;height:47%;left:2%;bottom:5%;transform:rotate(-6deg)}
+.caption{position:absolute;bottom:12px;left:10px;right:10px;text-align:center;font:italic 13px 'Playfair Display',serif;color:#625d51}
+.btn{display:inline-block;padding:13px 19px;border:1px solid #a75848;color:#a75848;text-decoration:none;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.ticker{text-align:center;padding:16px;background:#d8d1c5;color:#756e61;letter-spacing:.15em;font-size:10px;text-transform:uppercase}
+section{padding:85px 7%}
+.intro{text-align:center;max-width:650px;margin:0 auto 40px}
+.intro h2,.secret h2{font:400 clamp(36px,5vw,58px) 'Playfair Display',serif}
+.intro p{margin:auto}
+.rooms{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.room{background:#f8f5ed;padding:13px 13px 22px;box-shadow:0 12px 28px #3833280e}
+.room img{width:100%;height:230px;object-fit:cover}
+.room small{display:block;color:#a75848;margin:16px 4px 8px}
+.room h3{font:24px 'Playfair Display',serif;margin:5px}
+.room p{font-size:13px;line-height:1.8;color:#77756c;margin:8px 5px}
+.room button,.secret button{background:none;border:0;color:#a75848;text-transform:uppercase;letter-spacing:.08em;padding:8px 5px;cursor:pointer}
+.quote{background:#485548;color:#f5f1e8;text-align:center}
+.quote blockquote{font:italic clamp(28px,4vw,48px)/1.3 'Playfair Display',serif;max-width:850px;margin:20px auto}
+.secret{text-align:center;background:#f1ede4}
+.secret p{font:17px/1.8 'Playfair Display',serif;color:#726c61;max-width:550px;margin:20px auto;min-height:60px}
+.secret button{background:#a75848;color:white;padding:13px 20px}
+.end{text-align:center;color:white;background:linear-gradient(#27282099,#27282099),url('https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=1600&q=85') center/cover}
+.end h2{font:400 clamp(42px,7vw,74px) 'Playfair Display',serif;max-width:760px;margin:20px auto}
+.end p{line-height:1.9;max-width:520px;margin:auto}
+.footer{text-align:center;background:#282a24;color:#d8d5ca;padding:22px;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+.modal{display:none;position:fixed;inset:0;background:#191a16c9;place-items:center;padding:20px}
+.modal.open{display:grid}
+.card{background:#f8f5ed;max-width:520px;padding:40px;text-align:center;position:relative}
+.card h2{font:36px 'Playfair Display',serif}
+.card p{font:16px/1.8 'Playfair Display',serif;color:#726c61}
+.close{position:absolute;right:12px;top:8px;border:0;background:none;font-size:25px;cursor:pointer}
+@media(max-width:750px){.hero{grid-template-columns:1fr;padding:45px 24px}.gallery{height:390px}.rooms{grid-template-columns:1fr;max-width:500px}.room img{height:270px}section{padding:70px 20px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="brand">el museo de ti</div><div>entrada gratuita · cariño ilimitado</div></nav>
+<main>
+<header class="hero">
+  <div>
+    <div class="tag">una exposición única que abre cuando quieras</div>
+    <h1>El museo de<br>las cosas que<br><em>me encantan de mi bb</em></h1>
+    <p>Algunas de las mejores cosas de mi vida no se pueden colgar en una pared. Pero hoy quise hacerle una exposición para que sepas cuánto la valoro.</p>
+    <a class="btn" href="#salas">Entrar a la exposición →</a>
+  </div>
+  <div class="gallery">
+    <div class="frame one">
+      <img src="imgn11.jpg" alt="Un abrazo cálido">
+      <div class="caption">La felicidad de coincidir</div>
+    </div>
+    <div class="frame two">
+      <img src="imgn17.jpg" alt="Paisaje al atardecer">
+      <div class="caption">Un día cualquiera, contigo</div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker">SALA 01: TU RISA　✳　SALA 02: TU CORAZÓN　✳　SALA 03: TU FORMA DE SER</div>
+
+<section id="salas">
+  <div class="intro">
+    <div class="tag">recorrido recomendado: despacito</div>
+    <h2>Tres cosas muy importantes, muy en el fondo de mi crz</h2>
+    <p>Cada obra tiene una plaquita. Haz click para leer lo que preparé con todo el cariño del mundo</p>
+  </div>
+  <div class="rooms">
+    <article class="room">
+      <img src="imgif_8.gif" alt="Personas riéndose juntas">
+      <small>OBRA N.º 001</small><h3>Tu risa</h3>
+      <p>Una pieza luminosa, capaz de cambiar el ambiente de cualquier lugar.</p>
+      <button onclick="show(0)">Leer la plaquita ↗</button>
+    </article>
+    <article class="room">
+      <img src="imgn19.jpg" alt="Flores rosadas">
+      <small>OBRA N.º 002</small><h3>Tu manera de cuidar</h3>
+      <p>Una colección de gestos pequeños que dicen mucho más que mil palabras.</p>
+      <button onclick="show(1)">Leer la plaquita ↗</button>
+    </article>
+    <article class="room">
+      <img src="imgn9.jpg" alt="Un paisaje para explorar">
+      <small>OBRA N.º 003</small><h3>Tu forma de ser</h3>
+      <p>Una obra original. No existe copia, y cada día descubro algo nuevo.</p>
+      <button onclick="show(2)">Leer la plaquita ↗</button>
+    </article>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="tag" style="color:#d6b98a">PIEZA CENTRAL DE LA COLECCIÓN</div>
+  <blockquote>“No hay que ir muy lejos para encontrar algo extraordinario solo mira el espejo”</blockquote>
+</section>
+
+<section class="secret">
+  <div class="tag">SALA SECRETA · ACCESO LIBRE</div>
+  <h2>Hay una última obra</h2>
+  <p id="secret">Una pequeña sorpresa te está esperando detrás de la puerta.</p>
+  <button onclick="reveal()">Abrir la puerta ✳</button>
+</section>
+
+<section class="end">
+  <div class="tag" style="color:#e8cf9e">FIN DEL RECORRIDO, COMIENZO DE TODO LO NUESTRO</div>
+  <h2>Gracias por ser mi persona favorita.</h2>
+  <p>Aunque este museo cierre por hoy, siempre voy a encontrar motivos para admirarte, quererte y agradecer que estés en mi vida.</p>
+</section>
+</main>
+
+<footer class="footer">museo abierto para ti · todos los días del año</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)hide()">
+  <div class="card">
+    <button class="close" onclick="hide()" aria-label="Cerrar">×</button>
+    <div class="tag">NOTA DE LA CURADORA</div>
+    <h2 id="title"></h2><p id="text"></p>
+  </div>
+</div>
+
+<script>
+const plaques=[
+  ['Tu risa','Me encanta que una risa tuya pueda hacerme olvidar por un ratito cualquier preocupación. Ojalá la escuches muchísimo: el mundo te queda mejor cuando te ríes.'],
+  ['Tu manera de cuidar','A veces lo haces con una pregunta, una palabra o simplemente estando. Tienes un corazón que sabe hacer espacio para los demás.'],
+  ['Tu forma de ser','No tienes que parecerte a nadie. Lo mejor de ti es justamente eso: que eres tú. Esta exposición no estaría completa sin todo lo que te hace especial.']
+];
+
+function show(i){
+  document.querySelector('#title').textContent=plaques[i][0];
+  document.querySelector('#text').textContent=plaques[i][1];
+  document.querySelector('#modal').classList.add('open');
+}
+function hide(){document.querySelector('#modal').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')hide()});
+
+const notes=[
+  'La obra más importante de este museo no se puede fotografiar: es todo lo bonito que dejas en quienes te quieren.',
+  'Alguien se siente muy afortunado de tenerte en su vida. Ese alguien soy yo.',
+  'Que nunca te falten motivos para sonreír ni personas que te recuerden cuánto vales.'
+];
+function reveal(){
+  document.querySelector('#secret').textContent=notes[Math.floor(Math.random()*notes.length)];
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6e8d5">
+<title>La máquina de los cariñitos</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap');
+:root{--cream:#f6e8d5;--ink:#3a302b;--red:#cb6250;--orange:#e5a24d;--mint:#bdcdb5;--paper:#fff8eb;--muted:#796b5e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'DM Sans',Arial,sans-serif}
+.nav{max-width:1200px;margin:auto;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font:10px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.16em;color:#806f5b}
+.logo{font:italic 17px 'Playfair Display',Georgia,serif;letter-spacing:0;text-transform:none;color:var(--red)}
+.hero{max-width:1360px;margin:auto;min-height:calc(100svh - 66px);padding:42px 7vw 82px;display:grid;grid-template-columns:.86fr 1.14fr;align-items:center;gap:6vw}
+.copy{max-width:470px}
+.eyebrow{font:10px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.24em;color:var(--red)}
+h1{font:400 clamp(52px,7.3vw,94px)/.98 'Playfair Display',Georgia,serif;letter-spacing:-.05em;margin:24px 0}
+h1 em{color:var(--red);font-weight:400}
+.copy>p{font-size:15px;line-height:1.9;color:var(--muted);max-width:390px}
+.hint{display:flex;align-items:center;gap:12px;margin-top:28px;font-size:12px;color:var(--red)}
+.hint b{font-size:18px;font-weight:400}
+.machine-wrap{display:grid;place-items:center;min-height:590px;position:relative}
+.machine{width:min(100%,530px);padding:22px 23px 25px;border:3px solid #a9483d;border-radius:38px 38px 20px 20px;background:linear-gradient(115deg,#db7560,#ca5c4b 55%,#b94d45);box-shadow:inset 5px 0 #ffffff2d,inset -7px 0 #853b39,0 27px 55px #65443228;position:relative;transform:rotate(1deg)}
+.machine:before{content:'';position:absolute;width:80px;height:8px;left:50%;top:8px;transform:translateX(-50%);border-radius:8px;background:#8c3d37}
+.machine-head{height:84px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;color:#fff6e6}
+.machine-head strong{font:italic 20px 'Playfair Display',Georgia,serif}
+.machine-head small{font:9px 'DM Mono',monospace;letter-spacing:.15em}
+.display{padding:18px 16px 20px;border:8px solid #a4443b;border-radius:19px;background:#e9e2d0;box-shadow:inset 0 0 14px #463e3028}
+.display-title{font:9px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.19em;text-align:center;color:#756953;margin-bottom:16px}
+.snacks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.snack{min-height:112px;border:1px solid #cbc2a9;border-radius:13px;background:#f9f5e8;padding:12px 7px 9px;text-align:center;cursor:pointer;transition:transform .18s,box-shadow .18s;color:var(--ink);font-family:inherit}
+.snack:hover{transform:translateY(-4px);box-shadow:0 8px 14px #554c3020}
+.snack:focus-visible,.lever:focus-visible,.coin:focus-visible{outline:3px solid #fff2a5;outline-offset:3px}
+.snack .art{display:block;font-size:29px;margin:0 auto 7px;filter:drop-shadow(0 2px 1px #6c56382b)}
+.snack b{display:block;font:9px 'DM Mono',monospace;letter-spacing:.03em}
+.snack small{display:block;margin-top:4px;font:9px 'DM Mono',monospace;color:#907d61}
+.machine-controls{display:flex;align-items:center;justify-content:space-between;padding:16px 5px 3px}
+.coin{width:37px;height:37px;border-radius:50%;border:2px solid #ffe0a7;background:#dcaa57;color:#7a4a35;cursor:pointer;font-size:16px;box-shadow:inset 0 0 0 3px #f2c779}
+.slot{width:93px;height:13px;border-radius:10px;background:#803c39;box-shadow:inset 0 2px 4px #3c211d}
+.lever{height:44px;width:44px;border:0;background:#f3c26e;border-radius:12px;color:#754332;font-size:20px;cursor:pointer;box-shadow:0 4px 0 #9b5141;transition:.18s}
+.lever:active{transform:translateY(3px);box-shadow:0 1px 0 #9b5141}
+.tray{height:45px;margin:13px 18px 0;border:4px solid #a3473d;border-top-width:8px;border-radius:3px 3px 15px 15px;background:#b7bcaa;box-shadow:inset 0 -8px #8e998a}
+.machine-base{height:14px;margin:12px 28px 0;border-radius:5px;background:#a94a40;box-shadow:0 7px 0 #823b38}
+.machine-caption{text-align:center;color:#fff3df;font:9px 'DM Mono',monospace;letter-spacing:.12em;margin-top:16px;text-transform:uppercase}
+.spark{position:absolute;font-size:24px;color:#d9a559}
+.s1{left:3%;top:17%}.s2{right:1%;top:25%;font-size:18px}.s3{left:7%;bottom:16%;font-size:17px}
+.ticket{display:none;margin-top:16px;background:#fff6de;border:1px dashed #c89453;border-radius:10px;padding:13px 15px;text-align:center;font:italic 17px 'Playfair Display',Georgia,serif;color:#654d3a;animation:pop .3s ease-out}
+.ticket.show{display:block}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+.ticker{overflow:hidden;white-space:nowrap;background:#e4d4b9;border-block:1px solid #d6c5a8;padding:14px 0;color:#8a6f4f;font:10px 'DM Mono',monospace;letter-spacing:.2em;text-transform:uppercase}
+.ticker span{display:inline-block;animation:roll 37s linear infinite}
+@keyframes roll{to{transform:translateX(-50%)}}
+section{padding:95px 7vw}
+.intro{text-align:center;max-width:670px;margin:0 auto 48px}
+.intro .eyebrow{margin-bottom:17px}
+.intro h2{font:400 clamp(38px,5vw,60px)/1.12 'Playfair Display',Georgia,serif;letter-spacing:-.035em;margin:0 0 16px}
+.intro p{font-size:15px;line-height:1.8;color:var(--muted);max-width:500px;margin:auto}
+.gifts{max-width:1080px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.gift{background:#fff8eb;border:1px solid #e7d7c0;padding:24px 20px;min-height:205px;position:relative}
+.gift:after{content:'✳';position:absolute;right:13px;top:11px;color:#d9ab6b}
+.gift .emoji{font-size:25px}
+.gift h3{font:400 21px 'Playfair Display',Georgia,serif;margin:16px 0 8px}
+.gift p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}
+.dedication{background:#e8d6c5;text-align:center;padding:90px 20px}
+.dedication .paper{max-width:740px;margin:auto;padding:54px clamp(24px,7vw,80px);background:#fbf5e9;box-shadow:0 18px 50px #60492b17;position:relative}
+.dedication .paper:before{content:'✿';font-size:25px;color:var(--red);display:block;margin-bottom:13px}
+.dedication h2{font:400 clamp(36px,5vw,56px)/1.12 'Playfair Display',Georgia,serif;margin:15px 0 22px}
+.dedication p{font:16px/1.9 'Playfair Display',Georgia,serif;color:#72665b;max-width:550px;margin:0 auto 14px}
+.signature{font:italic 21px 'Playfair Display',Georgia,serif;color:var(--red);margin-top:25px}
+.ending{min-height:480px;display:grid;place-items:center;text-align:center;padding:80px 24px;background:linear-gradient(120deg,#52634e,#6f7653 55%,#a1825a);color:#fff9ed}
+.ending .inside{max-width:700px}
+.ending .eyebrow{color:#f7d8a3}
+.ending h2{font:400 clamp(44px,7vw,76px)/1.04 'Playfair Display',Georgia,serif;margin:23px 0}
+.ending p{font-size:15px;line-height:1.9;color:#f2eddf;max-width:510px;margin:auto}
+.footer{background:#39342a;color:#dfd1b8;text-align:center;padding:22px;font:9px 'DM Mono',monospace;letter-spacing:.18em;text-transform:uppercase}
+.floating{position:fixed;z-index:5;pointer-events:none;animation:fly 1.4s ease-out forwards;font-size:23px}
+@keyframes fly{to{opacity:0;transform:translateY(-130px) rotate(22deg) scale(1.35)}}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding:48px 24px 65px;gap:15px}.copy{max-width:600px}.machine-wrap{min-height:520px}.machine{max-width:510px}.gifts{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.nav{height:58px;padding:0 18px}.nav>div:last-child{font-size:8px}.machine-wrap{min-height:450px}.machine{padding:17px 14px 20px;border-radius:29px 29px 16px 16px}.machine-head{height:68px}.display{padding:13px 10px 14px;border-width:6px}.snacks{gap:7px}.snack{min-height:94px;padding:8px 4px}.snack .art{font-size:24px}.snack b,.snack small{font-size:8px}.machine-controls{padding-top:12px}.tray{margin-inline:12px}.machine-base{margin-inline:20px}section{padding:72px 20px}.gifts{gap:9px}.gift{padding:18px 14px;min-height:190px}.gift h3{font-size:19px}.dedication .paper{padding:42px 22px}.ending{min-height:420px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="logo">la máquina de los cariñitos</div><div>edición especial · solo para ti</div></nav>
+<main>
+<header class="hero">
+  <div class="copy">
+    <div class="eyebrow">funciona con monedas imaginarias y mucho amor</div>
+    <h1>Un detalle<br><em>para mi Novilunio</em><br>la bebecita Aymi</h1>
+    <p>Preparé esta maquinita con una colección de cosas que quiero regalarte: palabras lindas, abrazos pendientes y recordatorios para esos días en que hacen falta.</p>
+    <div class="hint"><b>↓</b> Elige un botón y recoge tu sorpresa</div>
+  </div>
+  <div class="machine-wrap">
+    <span class="spark s1">✦</span><span class="spark s2">✳</span><span class="spark s3">♡</span>
+    <div class="machine">
+      <div class="machine-head"><strong>cariñitos & compañía</strong><small>24 H · SIEMPRE</small></div>
+      <div class="display">
+        <div class="display-title">elige tu regalo de hoy</div>
+        <div class="snacks">
+          <button class="snack" onclick="dispense(0)"><span class="art">💌</span><b>A1 · NOTITA</b><small>gratis</small></button>
+          <button class="snack" onclick="dispense(1)"><span class="art">☀️</span><b>A2 · BUEN DÍA</b><small>1 sonrisa</small></button>
+          <button class="snack" onclick="dispense(2)"><span class="art">🧸</span><b>A3 · ABRAZO</b><small>sin vencimiento</small></button>
+          <button class="snack" onclick="dispense(3)"><span class="art">🍓</span><b>B1 · PIROPO</b><small>dulce</small></button>
+          <button class="snack" onclick="dispense(4)"><span class="art">🌷</span><b>B2 · FLORECITA</b><small>para ti</small></button>
+          <button class="snack" onclick="dispense(5)"><span class="art">✨</span><b>B3 · DESEO</b><small>pide uno</small></button>
+        </div>
+      </div>
+      <div class="machine-controls">
+        <button class="coin" aria-label="Moneda de cariño" onclick="coinDrop()">♡</button>
+        <div class="slot"></div>
+        <button class="lever" aria-label="Activar la máquina" onclick="randomGift()">↻</button>
+      </div>
+      <div class="tray"></div><div class="machine-base"></div>
+      <div class="ticket" id="ticket" aria-live="polite">Una sorpresa para ti.</div>
+      <div class="machine-caption">hecho con mucho amor · servicio infinito</div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker"><span> un abrazo por aquí　✳　un te quiero por allá　✳　un recordatorio bonito　✳　un abrazo por aquí　✳　un te quiero por allá　✳　un recordatorio bonito　✳　</span></div>
+
+<section>
+  <div class="intro">
+    <div class="eyebrow">también quiero q veas</div>
+    <h2>La caja de las cosas<br>que quiero que sepas</h2>
+    <p>No solo hay regalitos, También guarda unas cuantas vdds importantes sobre mi bb.</p>
+  </div>
+  <div class="gifts">
+    <article class="gift"><div class="emoji">🏆</div><h3>Eres increíble</h3><p>Tienes muchas habilidades y cosas sorprendetes eres muy admirable para mi me gusta tanto eso de ti.</p></article>
+    <article class="gift"><div class="emoji">🫶</div><h3>No estás sola</h3><p>Siempre que estes triste aun q yo no este mis deseos simepre seran buenos para ti, siempre tratare de aoyarte y ayudarte, sobretodo estando contigo.</p></article>
+    <article class="gift"><div class="emoji">🎈</div><h3>Me alegras la vida</h3><p>Hasta los momentos más simples tienen algo especial cuando los comparto contigo.</p></article>
+    <article class="gift"><div class="emoji">🍀</div><h3>Qué suerte encontrarte</h3><p>De todas las personas del mundo, qué suerte que justo tú formes parte de mi vida.</p></article>
+  </div>
+</section>
+
+<section class="dedication">
+  <article class="paper">
+    <div class="eyebrow">vale por un cariño inmenso</div>
+    <h2>Un recibo que no necesitas guardar</h2>
+    <p>Este comprobante certifica que hay alguien que piensa en ti con ternura, que celebra cada una de tus pequeñas victorias y que desea que la vida te trate con toda la dulzura que mereces.</p>
+    <p>Canjeable por conversaciones largas, risas espontáneas y todos los abrazos que hagan falta. No tiene fecha de expiración.</p>
+    <div class="signature">Emitido con amor, para ti ♡</div>
+  </article>
+</section>
+
+<section class="ending">
+  <div class="inside">
+    <div class="eyebrow">gracias por usar la máquina</div>
+    <h2>Vuelve cuando quieras. Siempre hay cariño para ti.</h2>
+    <p>Y si se acaba el stock, no te preocupes: mi cariño por ti nunca se agota nunca.</p>
+  </div>
+</section>
+</main>
+<footer class="footer">máquina artesanal · recargada con cariño cada día</footer>
+
+<script>
+const gifts=[
+  'Una notita: eres una de mis personas favoritas. Así, sin más.',
+  'Buen día: ojalá hoy te pase algo tan bonito como lo bonito que eres tú.',
+  'Abrazo activado. Imagina que te estoy apretando fuertecito ahora mismo.',
+  'Piropo: tienes una forma de existir que hace más amable el mundo.',
+  'Florecita para ti: que hoy encuentres algo pequeño que te haga sonreír.',
+  'Deseo concedido: que nunca te falten razones para sentirte querida.'
+];
+
+function dispense(i){
+  const ticket=document.querySelector('#ticket');
+  ticket.textContent=gifts[i];
+  ticket.classList.remove('show');
+  void ticket.offsetWidth;
+  ticket.classList.add('show');
+  sprinkle();
+}
+
+function randomGift(){
+  dispense(Math.floor(Math.random()*gifts.length));
+}
+
+function coinDrop(){
+  const button=document.querySelector('.coin');
+  button.textContent='♥';
+  setTimeout(()=>button.textContent='♡',850);
+  randomGift();
+}
+
+function sprinkle(){
+  for(let i=0;i<7;i++){
+    const heart=document.createElement('span');
+    heart.className='floating';
+    heart.textContent=['♡','✦','♥'][i%3];
+    heart.style.left=(window.innerWidth*.52+(Math.random()-.5)*210)+'px';
+    heart.style.top=(window.innerHeight*.63+(Math.random()-.5)*50)+'px';
+    heart.style.color=['#cb6250','#e5a24d','#71836a'][i%3];
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1500);
+  }
+}
+</script>
+</body>
+</html>
